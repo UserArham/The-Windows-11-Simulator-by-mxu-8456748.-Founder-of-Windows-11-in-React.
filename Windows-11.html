@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windows 11 Simulator</title>
+<style>
+  /* RESET */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, sans-serif;
+  }
+
+  /* DESKTOP BACKGROUND */
+  body {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #0ea5e9, #6366f1, #9333ea);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* WINDOWS 11 WINDOW */
+  .win11-window {
+    width: 94vw;
+    height: 94vh;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 40px 90px rgba(0,0,0,0.45);
+    position: relative;
+    transition: all 0.6s ease;
+  }
+
+  /* IFRAME */
+  .win11-window iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* BOOT SCREEN */
+  .boot-screen {
+    position: absolute;
+    inset: 0;
+    background: #020617;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 10;
+    transition: opacity 0.6s ease;
+  }
+
+  .boot-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .boot-text {
+    margin-top: 18px;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
+  /* SPINNER */
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255,255,255,0.25);
+    border-top: 4px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="win11-window">
+  <!-- BOOT SCREEN -->
+  <div class="boot-screen" id="boot">
+    <div class="spinner"></div>
+    <div class="boot-text">Starting Windows</div>
+  </div>
+
+  <!-- WINDOWS 11 IFRAME -->
+  <iframe
+    src="https://win11.blueedge.me"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+    allow="fullscreen"
+    onload="document.getElementById('boot').classList.add('hidden')"
+    title="Windows 11 Simulator">
+  </iframe>
+</div>
+
+</body>
+</html>
